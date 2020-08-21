@@ -1,0 +1,63 @@
+{
+  "name": "@ski/elements",
+  "version": "0.1.0",
+  "description": "Helper for defining custom elements",
+  "main": "elements.min.js",
+  "module": "elements.js",
+  "types": "src/index.ts",
+  "scripts": {
+    "build": "run-s clean build:*",
+    "watch": "run-p \"build:* -- --watch\"",
+    "clean": "rimraf js .types",
+    "build:bundle": "rollup -c",
+    "build:typescript": "ttsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saviski/ski-elements.git"
+  },
+  "keywords": [
+    "typescrip",
+    "javascript",
+    "custom elements",
+    "web components",
+    "html"
+  ],
+  "author": "saviski",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/saviski/ski-elements/issues"
+  },
+  "homepage": "https://github.com/saviski/ski-elements#readme",
+  "dependencies": {
+    "@ski/mixins": "next",
+    "@ski/observables": "next"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^9.0.0",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.26.4",
+    "rollup-plugin-terser": "^7.0.0",
+    "rollup-plugin-typescript2": "^0.27.2",
+    "tslib": "^2.0.1",
+    "typescript": "^4.0.2"
+  },
+  "files": [
+    ".types",
+    "js",
+    "src",
+    "elements.js",
+    "elements.min.js",
+    "elements.min.js.map"
+  ],
+  "prettier": {
+    "printWidth": 90,
+    "semi": false,
+    "tabWidth": 2,
+    "proseWrap": "never",
+    "arrowParens": "avoid",
+    "endOfLine": "auto",
+    "singleQuote": true
+  }
+}
