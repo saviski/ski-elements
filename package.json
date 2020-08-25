@@ -30,8 +30,12 @@
   },
   "homepage": "https://github.com/saviski/ski-elements#readme",
   "dependencies": {
+    "@ski/decorators": "next",
     "@ski/mixins": "next",
-    "@ski/observables": "next"
+    "@ski/observables": "next",
+    "@ski/eval-stream": "next",
+    "@ski/events": "next",
+    "@ski/data": "next"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^9.0.0",
