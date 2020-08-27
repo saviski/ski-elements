@@ -1,5 +1,5 @@
-import { SkiObservableExpresion } from '@ski/eval-stream'
-import { skidata } from '@ski/data'
+import { SkiStreamExpression } from '@ski/eval-stream/eval-stream.js'
+import { skidata } from '@ski/data/data.js'
 
 export default abstract class SkiSync extends HTMLElement {
   target!: HTMLElement
@@ -11,7 +11,7 @@ export default abstract class SkiSync extends HTMLElement {
   }
 
   async execute(attr: Attr) {
-    const expression = new SkiObservableExpresion(attr.value, this.target)
+    const expression = new SkiStreamExpression(attr.value, this.target)
     const stream = expression.run(skidata(this.target))
     for await (let data of stream)
       attr.name.endsWith('?')

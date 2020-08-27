@@ -1,5 +1,5 @@
-import SkiSync from './core/ski-sync.component.js'
-import { define } from '@ski/decorators'
+import SkiSync from './ski-sync.component.js'
+import { define } from '@ski/decorators/decorators.js'
 
 @define('ski-class-sync')
 @define('class-list')
@@ -28,7 +28,7 @@ import { define } from '@ski/decorators'
  * <span class="name1 name2">text</span>
  * ```
  */
-export default class SkiClassList extends SkiSync {
+export default class SkiSetClass extends SkiSync {
   apply(name: string, enable: any, attr: Attr) {
     const classes = name.split('.')
     const toggle = enable || (enable === undefined && Boolean(attr.value))

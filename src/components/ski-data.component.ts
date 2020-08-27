@@ -1,12 +1,12 @@
-import { define, attr, prop } from '@ski/decorators'
-import { setRootSkidata } from '@ski/data'
+import { define, attr, prop } from '@ski/decorators/decorators.js'
+import { setRootSkidata } from '@ski/data/data.js'
 
 @define('ski-data')
 export default class SkiData extends HTMLElement {
   @attr onrequestdata?: string
 
   connectedCallback() {
-    if (this.onrequestdata) this.skidata = eval(this.onrequestdata)
+    if (this.onrequestdata) this.skidata = new Function(this.onrequestdata)()
   }
 
   @prop set skidata(data: any) {

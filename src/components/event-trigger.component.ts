@@ -1,13 +1,13 @@
-import { define } from '@ski/decorators'
-import SkiSync from './core/ski-sync.component'
+import { define } from '@ski/decorators/decorators.js'
+import SkiSync from './sync/ski-sync.component.js'
 
 @define('event-trigger')
 @define('ski-event-trigger')
 export default class SkiEventTrigger extends SkiSync {
-  apply(name: string, value: any, attr: Attr) {
+  apply() {
     throw new Error('Method not implemented.')
   }
-  toggle(name: string, enable: boolean, attr: Attr) {
+  toggle() {
     throw new Error('Method not implemented.')
   }
 }

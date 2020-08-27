@@ -1,9 +1,7 @@
-import Ski from '@ski/template'
-import { Mixin } from '../../../mixins/src/types'
+import { setRootSkidata } from '@ski/data/data.js'
+import { Mixin } from '@ski/mixins/mixins.js'
 
 export const rootSkiData = Symbol('rootSkiData')
-
-const SKIMAP = new WeakMap<object, Ski>()
 
 declare global {
   interface HTMLElement {
@@ -21,14 +19,7 @@ export default function skitemplate(): Mixin<CustomElementConstructor> {
 
       connectedCallback() {
         super.connectedCallback && super.connectedCallback()
-        if (!SKIMAP.has(this))
-          SKIMAP.set(this, new Ski(this.shadowRoot!, this[rootSkiData] ?? this))
-        SKIMAP.get(this)!.init()
-      }
-
-      disconnectedCallback() {
-        super.disconnectedCallback && super.disconnectedCallback()
-        SKIMAP.get(this)?.disconnect()
+        setRootSkidata(this.shadowRoot!, this[rootSkiData] || this)
       }
     }
 }

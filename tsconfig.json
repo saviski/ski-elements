@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "incremental": true,
     "target": "es2018",
     "module": "esnext",
     "lib": [
@@ -15,7 +14,6 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
-    "preserveSymlinks": true,
     "moduleResolution": "node",
     "forceConsistentCasingInFileNames": true,
     "experimentalDecorators": true

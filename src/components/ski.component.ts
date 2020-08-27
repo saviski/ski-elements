@@ -1,6 +1,6 @@
-import { skicomponent } from '../decorators/ski-component'
-import { mix, MixinWith } from '@ski/mixins'
+import { mix, MixinWith } from '@ski/mixins/mixins.js'
+import skitemplate from '../mixins/ski-template.js'
 
-export default class SkiComponent extends skicomponent(HTMLElement) {
+export default class SkiComponent extends skitemplate()(HTMLElement) {
   static with: MixinWith<typeof SkiComponent>['with'] = mix(SkiComponent).with
 }

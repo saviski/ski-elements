@@ -1,14 +1,14 @@
-import { define } from '@ski/decorators'
-import SkiSync from './core/ski-sync.component.js'
+import { define } from '@ski/decorators/decorators.js'
+import SkiSync from './ski-sync.component.js'
 
 @define('style-map')
 @define('ski-style-sync')
-export default class SkiStyleMap extends SkiSync {
+export default class SkiSetStyle extends SkiSync {
   apply(name: string, value: any) {
     this.target.style.setProperty(name, value)
   }
 
-  toggle(name: string, enable: boolean, attr: Attr) {}
+  toggle() {}
 }
 
 const UNITS = [

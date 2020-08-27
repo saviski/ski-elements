@@ -2,15 +2,15 @@
   "name": "@ski/elements",
   "version": "0.1.0",
   "description": "Helper for defining custom elements",
-  "main": "elements.min.js",
+  "type": "module",
+  "main": "elements.js",
   "module": "elements.js",
   "types": "src/index.ts",
   "scripts": {
     "build": "run-s clean build:*",
     "watch": "run-p \"build:* -- --watch\"",
     "clean": "rimraf js .types",
-    "build:bundle": "rollup -c",
-    "build:typescript": "ttsc"
+    "build:bundle": "rollup -c"
   },
   "repository": {
     "type": "git",
@@ -30,12 +30,12 @@
   },
   "homepage": "https://github.com/saviski/ski-elements#readme",
   "dependencies": {
+    "@ski/data": "next",
     "@ski/decorators": "next",
-    "@ski/mixins": "next",
-    "@ski/observables": "next",
     "@ski/eval-stream": "next",
     "@ski/events": "next",
-    "@ski/data": "next"
+    "@ski/mixins": "next",
+    "@ski/spy": "next"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^9.0.0",

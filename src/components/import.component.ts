@@ -1,16 +1,13 @@
-import '../util/request-document'
+import '../util/request-document.js'
+import { define } from '@ski/decorators/decorators.js'
 
 const imports = new Set<string>()
 
-export function registerComponentImporter(name: string) {
-  customElements.define(name, ImportComponent)
-}
-
+@define('import-component')
 export class ImportComponent extends HTMLElement {
   async connectedCallback() {
-    if (!this.getAttribute('src')) throw Error(this.tagName + ' src tag is required')
-    let root = this.attachShadow({ mode: 'open' })
-    this.import(root)
+    if (!this.getAttribute('src')) throw Error(this.localName + ' src tag is required')
+    this.import(this.attachShadow({ mode: 'open' }))
   }
 
   get baseURI() {
@@ -19,11 +16,10 @@ export class ImportComponent extends HTMLElement {
   }
 
   async import(container: ShadowRoot) {
+    if (imports.has(this.baseURI)) return
+
     let base = document.createElement('base')
     base.href = this.baseURI
-
-    if (imports.has(base.href)) return
-
     try {
       const response = await fetch(base.href)
       const content = await response.document()
@@ -31,7 +27,7 @@ export class ImportComponent extends HTMLElement {
       container.append(content)
       imports.add(base.href)
     } catch (e) {
-      throw new Error(`${e}\n\tat <${this.tagName}> src ('${base.href}')`)
+      throw new Error(`${e}\n\tat <${this.localName}> src ('${base.href}')`)
     } finally {
       base.remove()
     }

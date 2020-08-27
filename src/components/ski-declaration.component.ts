@@ -1,7 +1,10 @@
-import { importModuleContent } from '../util/import-module-content'
-import { mix, attributes, content, baseURI } from '@ski/mixins'
+import { importModuleContent } from '../util/import-module-content.js'
+import { mix, attributes, content, baseURI } from '@ski/mixins/mixins.js'
+import { define } from '@ski/decorators/decorators.js'
 
+@define('ski-component')
 export class SkiComponentDeclaration extends HTMLElement {
+  //
   private content: DocumentFragment
 
   componentClass?: typeof HTMLElement
@@ -27,7 +30,7 @@ export class SkiComponentDeclaration extends HTMLElement {
   }
 
   get name() {
-    return this.getAttribute('name') || undefined
+    return this.getAttribute('name')
   }
 
   get extends() {
@@ -63,8 +66,4 @@ export class SkiComponentDeclaration extends HTMLElement {
 
     return mix(baseComponent).with(attributes(this.templateAttributes))
   }
-}
-
-export function registerSkiComponent(name = 'ski-component') {
-  customElements.get(name) || customElements.define(name, SkiComponentDeclaration)
 }
