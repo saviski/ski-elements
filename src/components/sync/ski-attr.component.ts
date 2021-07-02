@@ -1,10 +1,10 @@
 import SkiSync from './ski-sync.component.js'
-import { define } from '@ski/decorators/decorators.js'
+import { tag } from '@ski/decorators/decorators.js'
 
 const camelCase = (name: string) => name.replace(/-([a-z])/g, g => g[1].toUpperCase())
 
-@define('attr-map')
-@define('ski-attr')
+@tag('attr-map')
+@tag('ski-attr')
 export default class SkiSetAttr extends SkiSync {
   apply(name: string, value: any) {
     if (name.includes('.') || typeof value == 'object' || typeof value == 'function') {

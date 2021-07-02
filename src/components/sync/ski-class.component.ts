@@ -1,8 +1,8 @@
 import SkiSync from './ski-sync.component.js'
-import { define } from '@ski/decorators/decorators.js'
+import { tag } from '@ski/decorators/decorators.js'
 
-@define('ski-class-sync')
-@define('class-list')
+@tag('ski-class-sync')
+@tag('class-list')
 /**
  * Toggle element classes defined as attribute with live updates
  * @param attr An attribute with name starting with . (dot)
@@ -28,6 +28,8 @@ import { define } from '@ski/decorators/decorators.js'
  * <span class="name1 name2">text</span>
  * ```
  */
+@tag('ski-class')
+@tag('class-map')
 export default class SkiSetClass extends SkiSync {
   apply(name: string, enable: any, attr: Attr) {
     const classes = name.split('.')
@@ -35,7 +37,5 @@ export default class SkiSetClass extends SkiSync {
     for (let name of classes) name && this.target.classList.toggle(name, toggle)
   }
 
-  toggle(name: string, enable: boolean, attr: Attr) {
-    this.apply(name, enable, attr)
-  }
+  toggle = this.apply
 }

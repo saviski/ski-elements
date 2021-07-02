@@ -1,7 +1,7 @@
-import { define, attr } from '@ski/decorators/decorators.js'
+import { tag, attr } from '@ski/decorators/decorators.js'
 import { expression_attr } from '../../decorators/attr-expr.js'
 
-@define('ski-switch')
+@tag('ski-switch')
 export class SkiSwitch extends HTMLElement {
   cases!: SkiCase[]
   active: ChildNode = this
@@ -28,7 +28,7 @@ export class SkiSwitch extends HTMLElement {
   }
 }
 
-@define('ski-case')
+@tag('ski-case')
 export class SkiCase extends HTMLElement {
   @attr case?: string
   @attr default?: boolean

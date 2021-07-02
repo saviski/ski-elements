@@ -1,7 +1,7 @@
-import { define, attr, prop } from '@ski/decorators/decorators.js'
+import { tag, attr, prop } from '@ski/decorators/decorators.js'
 import { setRootSkidata } from '@ski/data/data.js'
 
-@define('ski-data')
+@tag('ski-data')
 export default class SkiData extends HTMLElement {
   @attr onrequestdata?: string
 

@@ -1,7 +1,7 @@
-import { define } from '@ski/decorators/decorators.js'
+import { tag } from '@ski/decorators/decorators.js'
 import { assignSkidata } from '@ski/data/data.js'
 
-@define('ski-list')
+@tag('ski-list')
 export default class SkiList<T> extends HTMLElement {
   //
   wrapperBegin = document.createComment(`<${this.localName}>`)

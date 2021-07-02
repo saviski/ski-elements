@@ -1,13 +1,13 @@
-import { define } from '@ski/decorators/decorators.js'
+import { tag } from '@ski/decorators/decorators.js'
 import { SkiStreamExpression } from '@ski/eval-stream/eval-stream.js'
 import { skidata } from '@ski/data/data.js'
 
-@define('ski-val')
+@tag('ski-val')
 export default class SkiVal extends HTMLElement {
   //
   constructor() {
     super()
-    this.run(this.textContent!)
+    this.run(this.getAttribute('value') || this.textContent || '')
   }
 
   async run(expression: string) {

@@ -1,8 +1,8 @@
-import { define } from '@ski/decorators/decorators.js'
+import { tag } from '@ski/decorators/decorators.js'
 import SkiSync from './ski-sync.component.js'
 
-@define('style-map')
-@define('ski-style-sync')
+@tag('style-map')
+@tag('ski-style')
 export default class SkiSetStyle extends SkiSync {
   apply(name: string, value: any) {
     this.target.style.setProperty(name, value)

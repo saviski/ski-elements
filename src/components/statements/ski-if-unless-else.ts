@@ -1,4 +1,4 @@
-import { define } from '@ski/decorators/decorators.js'
+import { tag } from '@ski/decorators/decorators.js'
 import { expression_attr } from '../../decorators/attr-expr.js'
 
 class SkiCondiction extends HTMLElement {
@@ -30,7 +30,7 @@ class SkiCondiction extends HTMLElement {
   }
 }
 
-@define('ski-if')
+@tag('ski-if')
 export class SkiIf extends SkiCondiction {
   @expression_attr
   set if(result: any) {
@@ -38,7 +38,7 @@ export class SkiIf extends SkiCondiction {
   }
 }
 
-@define('ski-unless')
+@tag('ski-unless')
 export class SkiUnless extends SkiCondiction {
   @expression_attr
   set unless(result: any) {
@@ -46,5 +46,5 @@ export class SkiUnless extends SkiCondiction {
   }
 }
 
-@define('ski-else')
+@tag('ski-else')
 export class SkiElse extends HTMLElement {}

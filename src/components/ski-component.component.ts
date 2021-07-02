@@ -1,8 +1,8 @@
 import { importModuleContent } from '../util/import-module-content.js'
 import { mix, attributes, content, baseURI } from '@ski/mixins/mixins.js'
-import { define } from '@ski/decorators/decorators.js'
+import { tag } from '@ski/decorators/decorators.js'
 
-@define('ski-component')
+@tag('ski-component')
 export class SkiComponentDeclaration extends HTMLElement {
   //
   private content: DocumentFragment

@@ -1,13 +1,17 @@
 import '../util/request-document.js'
-import { define } from '@ski/decorators/decorators.js'
+import { tag } from '@ski/decorators/decorators.js'
 
 const imports = new Set<string>()
 
-@define('import-component')
+@tag('import-component')
+@tag('ski-import')
 export class ImportComponent extends HTMLElement {
+  //
+  target = this.attachShadow({ mode: 'open' })
+
   async connectedCallback() {
-    if (!this.getAttribute('src')) throw Error(this.localName + ' src tag is required')
-    this.import(this.attachShadow({ mode: 'open' }))
+    if (this.getAttribute('src')) throw Error(this.localName + ' src tag is required')
+    this.import(this.target)
   }
 
   get baseURI() {

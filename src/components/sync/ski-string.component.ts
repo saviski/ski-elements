@@ -1,7 +1,7 @@
-import { define } from '@ski/decorators/decorators.js'
-import SkiVal from './val.component.js'
+import { tag } from '@ski/decorators/decorators.js'
+import SkiVal from './ski-val.component.js'
 
-@define('ski-string-template')
+@tag('ski-string')
 export default class SkiStringTemplate extends SkiVal {
   //
   async run(expression: string) {

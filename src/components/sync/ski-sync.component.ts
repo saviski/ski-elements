@@ -2,10 +2,14 @@ import { SkiStreamExpression } from '@ski/eval-stream/eval-stream.js'
 import { skidata } from '@ski/data/data.js'
 
 export default abstract class SkiSync extends HTMLElement {
-  target!: HTMLElement
+  get target(): HTMLElement {
+    const targetId = this.getAttribute('target')
+    const target = targetId ? document.getElementById(targetId) : this.parentElement
+    if (!target) throw new Error('Missing target')
+    return target
+  }
 
   connectedCallback() {
-    this.target = this.parentElement!
     this.remove()
     for (const attr of this.attributes) this.execute(attr)
   }
