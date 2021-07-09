@@ -1,12 +1,25 @@
-import { tag, attr, prop } from '@ski/decorators/decorators.js'
+import { tag, event, prop } from '@ski/decorators/decorators.js'
+import { Emitter } from '@ski/events/events.js'
 import { setRootSkidata } from '@ski/data/data.js'
+
+const onRequestData = new Emitter(
+  'requestdata',
+  class extends Event {
+    readonly target!: SkiData
+
+    set skidata(data: any) {
+      this.target.skidata = data
+    }
+  }
+)
 
 @tag('ski-data')
 export default class SkiData extends HTMLElement {
-  @attr onrequestdata?: string
+  //
+  @event onrequestdata = onRequestData.event
 
   connectedCallback() {
-    if (this.onrequestdata) this.skidata = new Function(this.onrequestdata)()
+    onRequestData.emit(this)
   }
 
   @prop set skidata(data: any) {
