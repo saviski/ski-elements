@@ -1,5 +1,5 @@
 import { tag } from '@ski/decorators/decorators.js'
-import { assignSkidata } from '@ski/data/data.js'
+import { $nodedata, nodedata } from '@ski/evalstream/evalstream.js'
 
 @tag('ski-list')
 export default class SkiList<T> extends HTMLElement {
@@ -13,8 +13,7 @@ export default class SkiList<T> extends HTMLElement {
 
   constructor() {
     super()
-    if (this.firstElementChild instanceof HTMLTemplateElement)
-      this.templateContent = this.firstElementChild.content
+    if (this.firstElementChild instanceof HTMLTemplateElement) this.templateContent = this.firstElementChild.content
     else {
       this.templateContent = document.createDocumentFragment()
       this.templateContent.append(...this.childNodes)
@@ -29,12 +28,11 @@ export default class SkiList<T> extends HTMLElement {
 
     const nodes = value.map((item, index) => {
       const node = this.getNode(item)
-      const data = varname
-        ? { [varname]: item, [indexname || 'index']: index }
-        : typeof item == 'object'
-        ? item
-        : {}
-      for (const childNode of node.childNodes) assignSkidata(childNode, data)
+      const data = varname ? { [varname]: item, [indexname || 'index']: index } : typeof item == 'object' ? item : {}
+
+      const d = nodedata(node)
+      for (const childNode of node.childNodes) childNode[$nodedata] = Object.create(d, { [$nodedata]: { value: data } })
+
       return node
     })
     this.nodes.forEach(node => nodes.includes(node) || node.remove())

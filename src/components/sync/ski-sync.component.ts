@@ -1,5 +1,5 @@
-import { SkiStreamExpression } from '@ski/eval-stream/eval-stream.js'
-import { skidata } from '@ski/data/data.js'
+import { LiveExpression } from '@ski/evalstream/evalstream.js'
+import { nodedata } from '@ski/evalstream/evalstream.js'
 
 export default abstract class SkiSync extends HTMLElement {
   get target(): HTMLElement {
@@ -15,8 +15,8 @@ export default abstract class SkiSync extends HTMLElement {
   }
 
   async execute(attr: Attr) {
-    const expression = new SkiStreamExpression(attr.value, this.target)
-    const stream = expression.run(skidata(this.target))
+    const expression = new LiveExpression(attr.value, this.target, attr.name)
+    const stream = expression.run(nodedata(this.target))
     for await (let data of stream)
       attr.name.endsWith('?')
         ? this.toggle(attr.name.slice(0, -1), Boolean(data), attr)

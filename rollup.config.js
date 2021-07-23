@@ -11,12 +11,12 @@ export default [
       typescript()
     ],
     external: [
-      "@ski/data/data.js",
       "@ski/decorators/decorators.js",
-      "@ski/eval-stream/eval-stream.js",
+      "@ski/evalstream/evalstream.js",
       "@ski/events/events.js",
       "@ski/mixins/mixins.js",
-      "@ski/spy/spy.js"
+      "@ski/spy/spy.js",
+      "@ski/streams/streams.js"
     ]
   }
 ]

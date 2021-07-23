@@ -3,7 +3,6 @@ import { tag } from '@ski/decorators/decorators.js'
 
 const imports = new Set<string>()
 
-@tag('import-component')
 @tag('ski-import')
 export class ImportComponent extends HTMLElement {
   //

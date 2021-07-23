@@ -1,15 +1,17 @@
-import { decorator, attr } from '@ski/decorators/decorators.js'
-import { SkiStreamExpression } from '@ski/eval-stream/eval-stream.js'
-import { skidata } from '@ski/data/data.js'
+import { MethodDecorator } from '@ski/decorators/decorators.js'
+import { inject, mixinAttributes } from '@ski/mixins/mixins.js'
+import { LiveExpression, nodedata } from '@ski/evalstream/evalstream.js'
 
-export const expression_attr = decorator<CustomElementConstructor | ((v: any) => void)>(
-  ({ prototype, propertyKey, descriptor }) => {
-    return attr<any, PropertyKey>(prototype, propertyKey, <ThisType<HTMLElement>>{
-      async set(expression: string) {
-        const evaluator = new SkiStreamExpression(expression, this)
-        const stream = evaluator.run(skidata(this))
+class ExpressionAttributeDecorator extends MethodDecorator<HTMLElement, any, any> {
+  decorateMethod({ constructor, property, descriptor } = this.params) {
+    inject(constructor, mixinAttributes).defineAttribute(property, {
+      async set(this: HTMLElement, expression: string = '') {
+        const evaluator = new LiveExpression(expression, this, property)
+        const stream = evaluator.run(nodedata(this))
         for await (const result of stream) descriptor.set!(result)
       },
     })
   }
-)
+}
+
+export const expression_attr = ExpressionAttributeDecorator.decorator()

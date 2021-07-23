@@ -1,10 +1,11 @@
-import { tag } from '@ski/decorators/decorators.js'
-import { SkiStreamExpression } from '@ski/eval-stream/eval-stream.js'
-import { skidata } from '@ski/data/data.js'
+import { attr, tag } from '@ski/decorators/decorators.js'
+import { LiveExpression, nodedata } from '@ski/evalstream/evalstream.js'
 
 @tag('ski-val')
 export default class SkiVal extends HTMLElement {
   //
+  @attr value?: string
+
   constructor() {
     super()
     this.run(this.getAttribute('value') || this.textContent || '')
@@ -13,11 +14,11 @@ export default class SkiVal extends HTMLElement {
   async run(expression: string) {
     const text = document.createTextNode('')
     this.replaceWith(text)
-    const evaluator = new SkiStreamExpression(expression, text)
-    const evalStream = evaluator.run(skidata(text))
+    const evaluator = new LiveExpression(expression, text, 'expression')
+    const evalStream = evaluator.run(nodedata(text))
     // TODO: disconnect stream when text node is removed forever
     for await (let value of evalStream)
-      if (text.ownerDocument) text.textContent = value
-      else evalStream.return()
+      if (text.ownerDocument) text.textContent = value?.toString()
+      else evalStream.return(null)
   }
 }

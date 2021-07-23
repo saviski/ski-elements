@@ -1,8 +1,6 @@
 import SkiSync from './ski-sync.component.js'
 import { tag } from '@ski/decorators/decorators.js'
 
-@tag('ski-class-sync')
-@tag('class-list')
 /**
  * Toggle element classes defined as attribute with live updates
  * @param attr An attribute with name starting with . (dot)
@@ -29,7 +27,6 @@ import { tag } from '@ski/decorators/decorators.js'
  * ```
  */
 @tag('ski-class')
-@tag('class-map')
 export default class SkiSetClass extends SkiSync {
   apply(name: string, enable: any, attr: Attr) {
     const classes = name.split('.')

@@ -1,5 +1,5 @@
 import { importModuleContent } from '../util/import-module-content.js'
-import { mix, attributes, content, baseURI } from '@ski/mixins/mixins.js'
+import { Mixin, attributes, content, baseURI } from '@ski/mixins/mixins.js'
 import { tag } from '@ski/decorators/decorators.js'
 
 @tag('ski-component')
@@ -11,8 +11,7 @@ export class SkiComponentDeclaration extends HTMLElement {
 
   constructor() {
     super()
-    if (this.firstElementChild instanceof HTMLTemplateElement)
-      this.content = this.firstElementChild.content
+    if (this.firstElementChild instanceof HTMLTemplateElement) this.content = this.firstElementChild.content
     else {
       this.content = document.createDocumentFragment()
       this.content.append(...this.childNodes)
@@ -46,13 +45,9 @@ export class SkiComponentDeclaration extends HTMLElement {
       )
     ).then(list => Object.assign({}, ...list))
 
-    const componentClass: typeof HTMLElement =
-      modules.default || (await this.createClass(this.extends))
+    const componentClass: typeof HTMLElement = modules.default || (await this.createClass(this.extends))
 
-    const componentWithTemplate = mix(componentClass).with(
-      content(this.content),
-      baseURI(componentBaseURI)
-    )
+    const componentWithTemplate = new Mixin(componentClass).with(content(this.content), baseURI(componentBaseURI))
 
     customElements.define(this.name || componentClass['is'], componentWithTemplate)
     this.componentClass = componentClass
@@ -60,10 +55,9 @@ export class SkiComponentDeclaration extends HTMLElement {
 
   private async createClass(extendsComponent?: string) {
     const baseComponent: typeof HTMLElement = extendsComponent
-      ? (await customElements.whenDefined(extendsComponent),
-        await customElements.get(extendsComponent))
+      ? (await customElements.whenDefined(extendsComponent), await customElements.get(extendsComponent))
       : HTMLElement
 
-    return mix(baseComponent).with(attributes(this.templateAttributes))
+    return new Mixin(baseComponent).with(attributes(this.templateAttributes))
   }
 }

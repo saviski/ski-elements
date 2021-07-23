@@ -5,12 +5,13 @@
   "type": "module",
   "main": "elements.js",
   "module": "elements.js",
-  "types": "elements.d.ts",
+  "types": "elements.ts",
   "scripts": {
     "build": "run-s clean build:*",
     "watch": "run-p \"build:* -- --watch\"",
     "clean": "rimraf js .types",
-    "build:bundle": "rollup -c"
+    "build:bundle": "rollup -c",
+    "tsc": "tsc"
   },
   "repository": {
     "type": "git",
@@ -30,12 +31,12 @@
   },
   "homepage": "https://github.com/saviski/ski-elements#readme",
   "dependencies": {
-    "@ski/data": "workspace:^0.1.0",
     "@ski/decorators": "workspace:^0.1.0",
-    "@ski/eval-stream": "workspace:^0.1.0",
+    "@ski/evalstream": "workspace:^0.1.0",
     "@ski/events": "workspace:^0.1.0",
     "@ski/mixins": "workspace:^0.1.0",
-    "@ski/spy": "workspace:^0.1.0"
+    "@ski/spy": "workspace:^0.1.0",
+    "@ski/streams": "^0.1.0"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^9.0.0",

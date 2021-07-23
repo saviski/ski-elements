@@ -3,7 +3,6 @@ import { tag } from '@ski/decorators/decorators.js'
 
 const camelCase = (name: string) => name.replace(/-([a-z])/g, g => g[1].toUpperCase())
 
-@tag('attr-map')
 @tag('ski-attr')
 export default class SkiSetAttr extends SkiSync {
   apply(name: string, value: any) {
