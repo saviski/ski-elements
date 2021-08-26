@@ -14,11 +14,15 @@ export default class SkiVal extends HTMLElement {
   async run(expression: string) {
     const text = document.createTextNode('')
     this.replaceWith(text)
-    const evaluator = new LiveExpression(expression, text, 'expression')
+    const evaluator = new LiveExpression<any>(expression, text, 'expression')
     const evalStream = evaluator.run(nodedata(text))
-    // TODO: disconnect stream when text node is removed forever
-    for await (let value of evalStream)
-      if (text.ownerDocument) text.textContent = value?.toString()
-      else evalStream.return(null)
+
+    for await (let value of evalStream) {
+      if (!text.ownerDocument) {
+        evalStream.return(null)
+        break
+      }
+      text.textContent = String(value)
+    }
   }
 }
